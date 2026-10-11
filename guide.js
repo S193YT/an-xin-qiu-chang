@@ -23,9 +23,8 @@ function cnt(){var all=document.querySelectorAll('#docList input'),c=0,s={};all.
 $('docList').addEventListener('change',cnt);cnt();
 $('resetDocs').addEventListener('click',function(){document.querySelectorAll('#docList input').forEach(function(x){x.checked=false});cnt()});
 $('printDocs').addEventListener('click',function(){document.body.classList.add('print-guide');window.print();setTimeout(function(){document.body.classList.remove('print-guide')},500)});
-$('callAgentTop').addEventListener('click',function(){location.href=$('agentTel').getAttribute('href')});
-// share claim summary to agent
-$('shareClaim').addEventListener('click',function(){var txt='您好，我發生車禍，想請您幫我看看求償金額：\n'+window.ACClaimText();
+// share claim summary (user picks recipient)
+$('shareClaim').addEventListener('click',function(){var txt='我整理了車禍求償清單，請幫我看看：\n'+window.ACClaimText();
  if(navigator.share){navigator.share({text:txt}).catch(function(){})}else{window.open('https://line.me/R/msg/text/?'+encodeURIComponent(txt),'_blank')}});
 // init: use saved guide date, else damage accident date
 var g=localStorage.getItem('acGuideDate')||$('accDate').value;if(g)$('gDate').value=g;renderTL();

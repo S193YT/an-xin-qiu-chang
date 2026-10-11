@@ -35,7 +35,7 @@
 <div class="card"><h2>加總結果</h2>
 <dl class="rows"><dt>合計請求金額</dt><dd id="cTotal">NT$ 0</dd><dt>依肇責比例後</dt><dd id="cFaulted">NT$ 0</dd><dt>扣除已領金額</dt><dd id="cPaid">NT$ 0</dd><dt class="hl">尚未獲賠參考金額</dt><dd class="hl" id="cRemaining">NT$ 0</dd></dl>
 <div id="claimTable"></div>
-<div class="actions"><button class="primary" id="copyClaim">複製清單</button><button class="secondary" id="printClaim">列印／存 PDF</button><button class="secondary" id="shareClaim">💬 傳給保險顧問</button><button class="secondary" id="clearClaim">清除</button></div>
+<div class="actions"><button class="primary" id="copyClaim">複製清單</button><button class="secondary" id="printClaim">列印／存 PDF</button><button class="secondary" id="shareClaim">💬 分享清單</button><button class="secondary" id="clearClaim">清除</button></div>
 <textarea id="copyFallback" readonly hidden aria-label="清單文字"></textarea></div>
 </section>
 
@@ -48,7 +48,7 @@
 <li><b>不認錯、不談錢、不簽字</b>：可以關心對方，但別說「都是我的錯」，也不要當場給錢或寫切結書。筆錄看清楚再簽，收好「當事人登記聯單」。</li>
 <li><b>通知保險公司、當天就醫</b>：撥保單上的 24 小時理賠專線取得案號；就算覺得沒事也去看醫生，請醫師開診斷證明書。</li>
 </ol>
-<button class="secondary wide" id="callAgentTop">📞 不知道怎麼辦？先打給您的保險顧問</button></div>
+<p class="muted small">不確定下一步？可以聯絡您的保險業務員或保險公司 24 小時專線協助。</p></div>
 
 <div class="card"><h2>⏰ 重要期限試算</h2><p class="muted">輸入事故日期，自動算出各項申請與時效日期。</p>
 <div class="field"><label for="gDate">事故日期</label><input type="date" id="gDate"></div>
@@ -84,12 +84,8 @@
 <div class="grid3"><div><h3>🚙 車體損失險</h3><p>自己車輛的修理費用，可依保單約定申請理賠，保險公司理賠後可再向肇事方代位求償。</p></div>
 <div><h3>🩹 傷害保險</h3><p>因意外事故受傷住院、骨折或失能等，可依約定申請保險金，一般不因向對方求償而受影響。</p></div>
 <div><h3>🏥 醫療保險</h3><p>住院、手術、門診等醫療支出，可依實支實付或日額等約定申請。</p></div></div>
-<p class="muted">不確定自己的保障夠不夠？歡迎找我幫您免費健檢保單。</p></section>
+<p class="muted">不確定自己的保障夠不夠？可以請您的保險業務員幫您做一次保單健檢。</p></section>
 
-<section class="card agent"><!-- ===== YT 請填寫以下聯絡資料 ===== -->
-<div class="avatar">👤</div><div><p class="muted small">您的專屬服務人員</p>
-<h3 class="aname">【請填姓名】</h3><p class="small">富邦人壽 業務代表</p>
-<div class="actions"><a class="primary" id="agentTel" href="tel:0900000000">📞 撥打電話</a><a class="line" id="agentLine" href="https://line.me/ti/p/REPLACE_ME" target="_blank" rel="noopener">💬 加 LINE</a></div></div></section>
 
 <footer class="disc"><b>免責聲明</b>：本工具試算結果僅供參考，不構成法律意見，亦不代表任何保險公司之理賠承諾；實際賠償金額以法院判決、調解或雙方和解為準。精神慰撫金由法院依個案斟酌。如有法律問題，建議洽詢律師或各地鄉鎮市區調解委員會、法律扶助基金會。所輸入資料僅儲存於您的裝置。</footer>
 </main>
