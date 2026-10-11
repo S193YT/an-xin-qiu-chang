@@ -1,0 +1,97 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1f6f6b"><title>安心求償｜車禍損害試算小幫手</title><link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 4l24 9v17c0 15-10 25-24 30C18 55 8 45 8 30V13z' fill='%231f6f6b'/%3E%3Cpath d='M22 32l7 7 14-15' stroke='%23fff' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"></head><body>
+<header class="hero"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4l24 9v17c0 15-10 25-24 30C18 55 8 45 8 30V13z" fill="#1f6f6b"/><path d="M22 32l7 7 14-15" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<h1>安心求償</h1><p>車禍不慌，合理賠償一起算清楚</p><p class="pills"><span>💚 站在受害人這邊</span><span>📐 依法試算</span><span>🔒 資料只存在您手機</span></p></header>
+<main class="wrap">
+<nav class="tabs" role="tablist"><button class="tab active" data-tab="damage" role="tab">🚗 車損折舊</button><button class="tab" data-tab="claim" role="tab">📋 民事求償</button><button class="tab" data-tab="guide" role="tab">🧭 理賠指南</button></nav>
+
+<section id="damage" class="panel active">
+<div class="card"><h2>車損零件折舊試算</h2>
+<div class="field"><label for="vehicle">車輛種類</label><select id="vehicle"><option value="">請選擇</option><option value="car">汽車</option><option value="moto">機車</option></select></div>
+<div class="two"><div class="field"><label for="firstDate">第一次領牌日期</label><input type="date" id="firstDate"></div>
+<div class="field"><label for="accDate">事故日期</label><input type="date" id="accDate"></div></div>
+<div class="two"><div class="field"><label for="parts">零件／材料費</label><div class="money"><span>NT$</span><input id="parts" class="amt" inputmode="numeric" placeholder="30,000"></div></div>
+<div class="field"><label for="labor">維修工資（含烤漆）</label><div class="money"><span>NT$</span><input id="labor" class="amt" inputmode="numeric" placeholder="0"></div></div></div>
+<div class="field"><label>對方肇責比例 <b class="fv" id="damageFaultV">100%</b></label>
+<div class="fault"><input type="range" id="damageFaultR" min="0" max="100" step="10" value="100"><input id="damageFault" inputmode="numeric" value="100" aria-label="自訂肇責比例"><span>%</span></div>
+<small>可拖曳滑桿，或於右側輸入自訂比例（如 65）。</small></div>
+<div class="note">💡 修車前請先向保險公司報案取得案號，經查勘估價或同意後再修，並保留估價單與發票。</div>
+<p id="damageError" class="err" hidden></p>
+<div class="actions"><button class="primary" id="calcDamage">開始試算</button><button class="secondary" id="clearDamage">清除</button></div></div>
+<div class="card" id="damageResult"><h2>試算結果</h2>
+<dl class="rows"><dt>車輛使用期間</dt><dd id="dAge">—</dd><dt>年折舊率</dt><dd id="dRate">—</dd><dt>零件原估價</dt><dd id="dParts">—</dd><dt>零件折舊金額</dt><dd id="dDep">—</dd><dt>折舊後零件</dt><dd id="dAfter">—</dd><dt>維修工資</dt><dd id="dLabor">—</dd><dt class="hl">修車費用參考總額</dt><dd class="hl" id="dGross">—</dd><dt class="hl">依肇責參考金額</dt><dd class="hl" id="dClaim">—</dd></dl>
+<button class="primary" id="sendToClaim" disabled>帶入民事求償清單 →</button>
+<div class="note"><b>折舊依據：</b>參照行政院「固定資產耐用年數表」及「固定資產折舊率表」，採定率遞減法：汽車耐用 5 年、年折舊率 36.9%；機車耐用 3 年、年折舊率 53.6%。未滿一年按月比例計算，不足一個月以一個月計；零件折舊後最低保留原價 1/10；工資不折舊。法院個案認定可能不同。</div></div>
+</section>
+
+<section id="claim" class="panel">
+<div class="card"><h2>車禍民事求償清單</h2><p class="muted">依診斷證明、收據、估價單等資料，填入已發生或預計主張的金額。</p>
+<div id="claimFields"></div>
+<div class="field"><label for="paid">目前已領理賠／補償金額</label><small>強制險、對方保險公司給付、和解金等。</small><div class="money"><span>NT$</span><input id="paid" class="amt" inputmode="numeric" placeholder="0"></div>
+<div class="note">依《強制汽車責任保險法》第 32 條，已領之強制險給付視為加害人損害賠償金額之一部分，求償時應予扣除。</div></div>
+<div class="field"><label>對方肇責比例 <b class="fv" id="claimFaultV">100%</b></label>
+<div class="fault"><input type="range" id="claimFaultR" min="0" max="100" step="10" value="100"><input id="claimFault" inputmode="numeric" value="100" aria-label="自訂肇責比例"><span>%</span></div></div></div>
+<div class="card"><h2>加總結果</h2>
+<dl class="rows"><dt>合計請求金額</dt><dd id="cTotal">NT$ 0</dd><dt>依肇責比例後</dt><dd id="cFaulted">NT$ 0</dd><dt>扣除已領金額</dt><dd id="cPaid">NT$ 0</dd><dt class="hl">尚未獲賠參考金額</dt><dd class="hl" id="cRemaining">NT$ 0</dd></dl>
+<div id="claimTable"></div>
+<div class="actions"><button class="primary" id="copyClaim">複製清單</button><button class="secondary" id="printClaim">列印／存 PDF</button><button class="secondary" id="shareClaim">💬 傳給保險顧問</button><button class="secondary" id="clearClaim">清除</button></div>
+<textarea id="copyFallback" readonly hidden aria-label="清單文字"></textarea></div>
+</section>
+
+<section id="guide" class="panel">
+<div class="card urgent"><h2>🆘 剛發生事故？先做這 5 件事</h2>
+<ol class="steps">
+<li><b>先顧安全</b>：開雙黃燈、人移到路邊或護欄外；傷者非必要別移動。三角警示牌放在車後方，一般道路約 30–100 公尺，高速公路 100 公尺以上。</li>
+<li><b>報案</b>：有人受傷打 <a href="tel:119">119</a>，事故不論大小都建議打 <a href="tel:110">110</a> 請警察到場。</li>
+<li><b>移車前先拍照</b>：遠景（路口、號誌）、中景（雙方車輛位置）、近景（撞擊點、車牌、煞車痕）；行車紀錄器立刻備份，記下監視器位置與目擊者電話。</li>
+<li><b>不認錯、不談錢、不簽字</b>：可以關心對方，但別說「都是我的錯」，也不要當場給錢或寫切結書。筆錄看清楚再簽，收好「當事人登記聯單」。</li>
+<li><b>通知保險公司、當天就醫</b>：撥保單上的 24 小時理賠專線取得案號；就算覺得沒事也去看醫生，請醫師開診斷證明書。</li>
+</ol>
+<button class="secondary wide" id="callAgentTop">📞 不知道怎麼辦？先打給您的保險顧問</button></div>
+
+<div class="card"><h2>⏰ 重要期限試算</h2><p class="muted">輸入事故日期，自動算出各項申請與時效日期。</p>
+<div class="field"><label for="gDate">事故日期</label><input type="date" id="gDate"></div>
+<ol class="timeline" id="timeline"></ol>
+<div class="note">期限依《道路交通事故處理辦法》、《車輛行車事故鑑定及覆議作業辦法》、刑法第 284、287 條及刑事訴訟法第 237 條、民法第 197 條、強制汽車責任保險法第 14 條整理。刑事告訴期間實際自「知悉犯人」起算，民事與強制險時效自「知有損害及賠償義務人／保險人」起算，此處以事故日估算，寧早不晚。</div></div>
+
+<div class="card"><h2>📂 理賠文件清單</h2><p class="muted">打勾會自動記住，方便一項項備齊。</p>
+<div class="check" id="docList"></div>
+<div class="actions"><button class="secondary" id="printDocs">🖨 列印清單</button><button class="secondary" id="resetDocs">重設勾選</button></div></div>
+
+<div class="card"><h2>🔧 車子可以先修嗎？</h2>
+<p><b>原則：先報案、再修車。</b>取得案號，等保險公司查勘估價或同意後再進廠；修前拍照，保留估價單、發票、拖吊收據。自行先修，金額可能被核減。</p>
+<div class="grid2"><div class="box"><h3>✅ 有車體險</h3><p>報案後可進保修廠維修，保險公司理賠後再向肇事方代位求償。車體險分甲、乙、丙式，範圍不同，是否影響續保保費請先向產險確認。</p></div>
+<div class="box"><h3>⬜ 沒有車體險</h3><p>先自付修理費，再依肇責比例向對方（通常是對方的第三人責任險）請求。修前請對方保險公司確認估價，零件會扣折舊。車輛「貶值」通常要專業鑑價，實務上不易求償。</p></div></div></div>
+
+<div class="card"><h2>🤝 和解前，先看這裡</h2>
+<div class="grid2"><div class="box ok"><h3>✔ 建議這樣做</h3><ul><li>等傷勢穩定或醫師評估後再談</li><li>先拿到初步分析研判表，了解肇責</li><li>用單據說話，帶書面求償明細</li><li>先談有單據的項目，最後談慰撫金</li><li>優先考慮公所調解，經法院核定後可強制執行</li></ul></div>
+<div class="box no"><h3>✘ 千萬避免</h3><ul><li>傷還沒好就簽「拋棄其他請求」</li><li>未經保險公司同意自行承諾金額</li><li>收現金卻沒有收據或和解書</li><li>用提告威脅對方付不合理金額</li><li>拖過 6 個月刑事告訴期</li></ul></div></div>
+<div class="note">和解書請寫清楚：金額、付款期限、是否已含強制險給付、拋棄請求的範圍。私下和解只有一般契約效力；公所調解成立並經法院核定，與確定判決有同一效力（鄉鎮市調解條例第 27 條）。</div></div>
+
+<div class="card"><h2>❓ 常見問題</h2>
+<details><summary>小擦撞私下處理、不報警可以嗎？</summary><p>可以，但沒有警方紀錄，對方事後反悔或出現傷勢時很難舉證，也可能影響理賠。還是建議報警。</p></details>
+<details><summary>初步分析研判表就是最後的肇責嗎？</summary><p>不是，只供參考。有爭議可在事故後 6 個月內申請行車事故鑑定，最終仍以法院判決或雙方和解為準。</p></details>
+<details><summary>我有自己的醫療險、意外險，還能跟對方求償嗎？</summary><p>人身保險給付和對方的損害賠償一般是不同的權利，通常可以分別主張；實支實付型要注意收據正本、副本的規定。</p></details>
+<details><summary>領了強制險，對方還要賠全額嗎？</summary><p>強制險給付視為加害人賠償的一部分，對方可以主張扣除（強制險法第 32 條）。本工具的「已領金額」欄就是處理這件事。</p></details>
+<details><summary>看護費、工作損失要怎麼證明？</summary><p>關鍵在診斷證明書的醫囑，例如「需專人看護○日」「宜休養○日」。沒有記載時通常很難主張，請如實告訴醫師症狀，並保留薪資或請假證明。親屬看護也可以主張。</p></details>
+<details><summary>和解談不攏，刑事告訴要等嗎？</summary><p>有人受傷時，過失傷害是告訴乃論，須在知悉犯人後 6 個月內提出。談不攏時可以先提告保全權利，但撤回告訴後不能再告，撤回前要確認款項已到位。</p></details>
+<details><summary>修車可以要求全新零件的錢嗎？</summary><p>零件以新換舊須扣除折舊（可用「車損折舊」分頁試算），工資、烤漆一般不扣。</p></details>
+</div>
+</section>
+
+<section class="card ins"><h2>🛡️ 保險能補什麼？</h2><p class="muted">求償之外，自己的保單也可能派上用場（實際以各保單條款為準）：</p>
+<div class="grid3"><div><h3>🚙 車體損失險</h3><p>自己車輛的修理費用，可依保單約定申請理賠，保險公司理賠後可再向肇事方代位求償。</p></div>
+<div><h3>🩹 傷害保險</h3><p>因意外事故受傷住院、骨折或失能等，可依約定申請保險金，一般不因向對方求償而受影響。</p></div>
+<div><h3>🏥 醫療保險</h3><p>住院、手術、門診等醫療支出，可依實支實付或日額等約定申請。</p></div></div>
+<p class="muted">不確定自己的保障夠不夠？歡迎找我幫您免費健檢保單。</p></section>
+
+<section class="card agent"><!-- ===== YT 請填寫以下聯絡資料 ===== -->
+<div class="avatar">👤</div><div><p class="muted small">您的專屬服務人員</p>
+<h3 class="aname">【請填姓名】</h3><p class="small">富邦人壽 業務代表</p>
+<div class="actions"><a class="primary" id="agentTel" href="tel:0900000000">📞 撥打電話</a><a class="line" id="agentLine" href="https://line.me/ti/p/REPLACE_ME" target="_blank" rel="noopener">💬 加 LINE</a></div></div></section>
+
+<footer class="disc"><b>免責聲明</b>：本工具試算結果僅供參考，不構成法律意見，亦不代表任何保險公司之理賠承諾；實際賠償金額以法院判決、調解或雙方和解為準。精神慰撫金由法院依個案斟酌。如有法律問題，建議洽詢律師或各地鄉鎮市區調解委員會、法律扶助基金會。所輸入資料僅儲存於您的裝置。</footer>
+</main>
+<div class="sticky" id="sticky"><span id="stickyLabel">修車費用參考總額</span><b id="stickyVal">—</b></div>
+<script src="calc.js"></script><script src="app.js"></script><script src="guide.js"></script></body></html>
